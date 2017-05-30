@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Management System</title>
+
+<!-- Bootstrap CSS -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<!-- FontAwesome -->
+<link href="css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Bootstrap -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Angular JS -->
+<script src="js/angular.min.js"></script>
+<script src="js/pms_custom.js"></script>
+<!-- Firebase -->
+<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+
+</head>
+<body ng-app="pmsApp">
+<div ng-controller="CController">
+	<header class="header">
+		<div class="container-fluid">
+			<h1>Project Management System</h1>
+		</div>
+	</header>
+	<div class="container-fluid">
+		<h3>Project List</h3>
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Project Name</th>
+						<th>Client Name</th>
+						<th>Project Type</th>
+						<th>Project Details</th>
+						<th>Project Url</th>
+						<th>Start Date</th>
+						<th>Completion Date</th>
+						<th>Budget</th>
+						<th>Payment Mode</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="project in projects">
+						<td>{{ project.project_name }}</td>
+						<td>{{ project.client_name }}</td>
+						<td>{{ project.project_type }}</td>
+						<td>{{ project.project_details }}</td>
+						<td>{{ project.project_url }}</td>
+						<td>{{ project.start_date }}</td>
+						<td>{{ project.completion_date }}</td>
+						<td>{{ project.budget }}</td>
+						<td>{{ project.payment_mode }}</td>
+						<td>
+							<button class="btn btn-warning" data-toggle="modal" data-target="#showData" ng-click="showData(project)"><i class="fa fa-eye"></i></button>&nbsp;
+							<button class="btn btn-primary" data-toggle="modal" data-target="#editData" ng-click="editData(project)"><i class="fa fa-pencil"></i></button>&nbsp;
+							<button class="btn btn-danger" ng-click="deleteData(project)"><i class="fa fa-trash"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<hr>
+
+		<button class="btn btn-success" ng-click="showForm()" data-toggle="modal" data-target="#addData">Add Project <i class="fa fa-plus"></i></button>
+
+		
+	</div>
+
+	<div class="modal fade" id="addData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Add Details</h4>
+				</div>
+				<div class="modal-body" ng-show="addFormShow">
+					<form class="form" width=50% style="padding:10px;" ng-submit="addFormSubmit()" id="addForm">
+						<div class="form-group">
+							<label>Project Name</label>
+							<input type="text" ng-model="project_name" class="form-control" placeholder="Project Name">
+						</div>
+						<div class="form-group">
+							<label>Client Name</label>
+							<input type="text" ng-model="client_name" class="form-control" placeholder="Client Name">
+						</div>
+						<input type="text" ng-model="project_type" placeholder="Project Type">
+						<input type="text" ng-model="project_url" placeholder="Project Url">
+						<br>
+						<textarea ng-model="project_details" placeholder="Project Details"></textarea>
+						<br/>
+						<input type="text" ng-model="start_date" placeholder="Start Date">
+						<input type="text" ng-model="completion_date" placeholder="Completion Date">
+						<br>
+						<input type="text" ng-model="budget" placeholder="Budget">
+						<input type="text" ng-model="payment_mode" placeholder="Payment Mode">
+						<br>
+						<button type="submit" class="btn btn-default btn-success">Add Project</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="editData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Edit Details</h4>
+				</div>
+				<div class="modal-body" ng-show="editFormShow">
+					<form width=50% style="padding:10px;" ng-submit="editFormSubmit()">
+						<input type="text" ng-model="project_name" placeholder="Project Name">
+						<input type="text" ng-model="client_name" placeholder="Client Name">
+						<br/>
+						<input type="text" ng-model="project_type" placeholder="Project Type">
+						<input type="text" ng-model="project_url" placeholder="Project Url">
+						<br>
+						<textarea ng-model="project_details" placeholder="Project Details"></textarea>
+						<br/>
+						<input type="text" ng-model="start_date" placeholder="Start Date">
+						<input type="text" ng-model="completion_date" placeholder="Completion Date">
+						<br>
+						<input type="text" ng-model="budget" placeholder="Budget">
+						<input type="text" ng-model="payment_mode" placeholder="Payment Mode">
+						<br>
+						<button type="submit" class="btn btn-default btn-success">Update Project</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="showData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Full Detail</h4>
+				</div>
+				<div class="modal-body" ng-show="detailsShow">
+					<dl>
+						<dt>Project Name</dt>
+						<dd>{{ project_name }}</dd>
+						<dt>Client Name</dt>
+						<dd>{{client_name}}</dd>
+						<dt>Project Type</dt>
+						<dd>{{project_type}}</dd>
+						<dt>Project Url</dt>
+						<dd>{{project_url}}</dd>
+						<dt>Project Details</dt>
+						<dd>{{project_details}}</dd>
+						<dt>Start Date</dt>
+						<dd>{{start_date}}</dd>
+						<dt>Completion Date</dt>
+						<dd>{{completion_date}}</dd>
+						<dt>Budget</dt>
+						<dd>{{budget}}</dd>
+						<dt>Payment Mode</dt>
+						<dd>{{payment_mode}}</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+</body>
+</html>
