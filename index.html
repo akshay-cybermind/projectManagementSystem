@@ -11,19 +11,26 @@
 <link href="css/style.css" rel="stylesheet">
 <!-- FontAwesome -->
 <link href="css/font-awesome.min.css" rel="stylesheet">
+<!-- Datepicker -->
+<link href="assets/datepicker/bootstrap-datepicker.css" rel="stylesheet">
 
 <!-- Bootstrap -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- Datepicker -->
+<script type="text/javascript" src="assets/datepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+	$('.datepicker').datepicker();
+</script>
 
 <!-- Angular JS -->
-<script src="js/angular.min.js"></script>
-<script src="js/pms_custom.js"></script>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/pms_custom.js"></script>
 <!-- Firebase -->
-<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+<script type="text/javascript" src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
 <!-- AngularFire -->
-<script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+<script type="text/javascript" src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
 
 </head>
 <body ng-app="pmsApp">
@@ -84,29 +91,83 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Add Details</h4>
+					<h4 class="modal-title" id="myModalLabel">Add a Project</h4>
 				</div>
 				<div class="modal-body" ng-show="addFormShow">
 					<form class="form" width=50% style="padding:10px;" ng-submit="addFormSubmit()" id="addForm">
-						<div class="form-group">
-							<label>Project Name</label>
-							<input type="text" ng-model="project_name" class="form-control" placeholder="Project Name">
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Project Name</label>
+									<input type="text" ng-model="project_name" class="form-control" placeholder="Project Name">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Client Name</label>
+									<input type="text" ng-model="client_name" class="form-control" placeholder="Client Name">
+								</div>
+							</div>
 						</div>
-						<div class="form-group">
-							<label>Client Name</label>
-							<input type="text" ng-model="client_name" class="form-control" placeholder="Client Name">
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Project Type</label>
+									<input type="text" ng-model="project_type" class="form-control" placeholder="Project Type">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Project Url</label>
+									<input type="text" ng-model="project_url" class="form-control" placeholder="Project Url">
+								</div>
+							</div>
 						</div>
-						<input type="text" ng-model="project_type" placeholder="Project Type">
-						<input type="text" ng-model="project_url" placeholder="Project Url">
-						<br>
-						<textarea ng-model="project_details" placeholder="Project Details"></textarea>
-						<br/>
-						<input type="text" ng-model="start_date" placeholder="Start Date">
-						<input type="text" ng-model="completion_date" placeholder="Completion Date">
-						<br>
-						<input type="text" ng-model="budget" placeholder="Budget">
-						<input type="text" ng-model="payment_mode" placeholder="Payment Mode">
-						<br>
+						<div class="row">
+							<div class="col-md-12 col-sm-12">
+								<div class="form-group">
+									<textarea ng-model="project_details" class="form-control" placeholder="Project Details"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Start Date</label>
+									<div class="input-group date" data-provide="datepicker">
+										<input type="text" ng-model="start_date" class="form-control" placeholder="Start Date">
+										<div class="input-group-addon">
+											<span class="fa fa-calendar"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Completion Date</label>
+									<div class="input-group date" data-provide="datepicker">
+										<input type="text" ng-model="completion_date" class="form-control" placeholder="Completion Date">
+										<div class="input-group-addon">
+											<span class="fa fa-calendar"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Budget</label>
+									<input type="text" ng-model="budget" class="form-control" placeholder="Budget">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Payment Mode</label>
+									<input type="text" ng-model="payment_mode" class="form-control" placeholder="Payment Mode">
+								</div>
+							</div>
+						</div>
 						<button type="submit" class="btn btn-default btn-success">Add Project</button>
 					</form>
 				</div>
@@ -119,24 +180,83 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Edit Details</h4>
+					<h4 class="modal-title" id="myModalLabel">Update Project</h4>
 				</div>
 				<div class="modal-body" ng-show="editFormShow">
 					<form width=50% style="padding:10px;" ng-submit="editFormSubmit()">
-						<input type="text" ng-model="project_name" placeholder="Project Name">
-						<input type="text" ng-model="client_name" placeholder="Client Name">
-						<br/>
-						<input type="text" ng-model="project_type" placeholder="Project Type">
-						<input type="text" ng-model="project_url" placeholder="Project Url">
-						<br>
-						<textarea ng-model="project_details" placeholder="Project Details"></textarea>
-						<br/>
-						<input type="text" ng-model="start_date" placeholder="Start Date">
-						<input type="text" ng-model="completion_date" placeholder="Completion Date">
-						<br>
-						<input type="text" ng-model="budget" placeholder="Budget">
-						<input type="text" ng-model="payment_mode" placeholder="Payment Mode">
-						<br>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Project Name</label>
+									<input type="text" ng-model="project_name" class="form-control" placeholder="Project Name">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Client Name</label>
+									<input type="text" ng-model="client_name" class="form-control" placeholder="Client Name">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Project Type</label>
+									<input type="text" ng-model="project_type" class="form-control" placeholder="Project Type">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Project Url</label>
+									<input type="text" ng-model="project_url" class="form-control" placeholder="Project Url">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 col-sm-12">
+								<div class="form-group">
+									<textarea ng-model="project_details" class="form-control" placeholder="Project Details"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Start Date</label>
+									<div class="input-group date" data-provide="datepicker">
+										<input type="text" ng-model="start_date" class="form-control" placeholder="Start Date">
+										<div class="input-group-addon">
+											<span class="fa fa-calendar"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Completion Date</label>
+									<div class="input-group date" data-provide="datepicker">
+										<input type="text" ng-model="completion_date" class="form-control" placeholder="Completion Date">
+										<div class="input-group-addon">
+											<span class="fa fa-calendar"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Budget</label>
+									<input type="text" ng-model="budget" class="form-control" placeholder="Budget">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Payment Mode</label>
+									<input type="text" ng-model="payment_mode" class="form-control" placeholder="Payment Mode">
+								</div>
+							</div>
+						</div>
 						<button type="submit" class="btn btn-default btn-success">Update Project</button>
 					</form>
 				</div>
