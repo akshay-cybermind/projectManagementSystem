@@ -101,6 +101,8 @@ pmsApp
 	}
 
 	$scope.deleteData=function(parent) {
-		$scope.projects.$remove(parent);
+		if (confirm('Are you sure you want to delete this?')) {
+			$scope.projects.$remove(parent);
+		}
 	}
 }]);
