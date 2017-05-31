@@ -93,8 +93,8 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="myModalLabel">Add a Project</h4>
 				</div>
-				<div class="modal-body" >
-					<form class="form" width=50% style="padding:10px;" ng-submit="addFormSubmit()" id="addForm">
+				<div class="modal-body">
+					<form ng-submit="addFormSubmit()" id="addForm">
 						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
@@ -184,7 +184,7 @@
 					<h4 class="modal-title" id="myModalLabel">Update Project</h4>
 				</div>
 				<div class="modal-body" ng-show="editFormShow">
-					<form width=50% style="padding:10px;" ng-submit="editFormSubmit()">
+					<form ng-submit="editFormSubmit()">
 						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
@@ -274,9 +274,9 @@
 					<h4 class="modal-title" id="myModalLabel">Full Detail</h4>
 				</div>
 				<div class="modal-body" ng-show="detailsShow">
-					<dl>
+					<dl class="dl-horizontal">
 						<dt>Project Name</dt>
-						<dd>{{ project_name }}</dd>
+						<dd>{{project_name}}</dd>
 						<dt>Client Name</dt>
 						<dd>{{client_name}}</dd>
 						<dt>Project Type</dt>
