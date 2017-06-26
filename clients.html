@@ -48,10 +48,12 @@
 					<tr>
 						<th>Name</th>
 						<th>Email</th>
+						<th>Phone</th>
 						<th>Country</th>
 						<th>City</th>
 						<th>Street Address</th>
 						<th>Source</th>
+						<th>Source ID</th>
 						<th width="160">Action</th>
 					</tr>
 				</thead>
@@ -59,10 +61,12 @@
 					<tr ng-repeat="client in getClients">
 						<td>{{ client.client_name }}</td>
 						<td>{{ client.client_email }}</td>
+						<td>{{ client.client_phone }}</td>
 						<td>{{ client.client_country }}</td>
 						<td>{{ client.client_city }}</td>
 						<td>{{ client.client_st_add }}</td>
 						<td>{{ client.client_source }}</td>
+						<td>{{ client.client_source_id }}</td>
 						<td width="160">
 							<button class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#showData" ng-click="showData(client)"><i class="fa fa-eye"></i></button>&nbsp;
 							<button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#editData" ng-click="editData(client)"><i class="fa fa-pencil"></i></button>&nbsp;
@@ -97,35 +101,49 @@
 							<div class="col-lg col-md col-sm">
 								<div class="form-group">
 									<label>Email</label>
-									<input type="text" ng-model="client_email" class="form-control" placeholder="Email" required="required">
+									<input type="email" ng-model="client_email" class="form-control" placeholder="Email" required="required">
 								</div>
 							</div>
 						</div>
 						<div class="row">
+							<div class="col-lg col-md col-sm">
+								<div class="form-group">
+									<label>Phone</label>
+									<input type="text" ng-model="client_phone" class="form-control" placeholder="Phone">
+								</div>
+							</div>
 							<div class="col-lg col-md col-sm">
 								<div class="form-group">
 									<label>Country</label>
 									<input type="text" ng-model="client_country" class="form-control" placeholder="Country" required="required">
 								</div>
 							</div>
+						</div>
+						<div class="row">
 							<div class="col-lg col-md col-sm">
 								<div class="form-group">
 									<label>City</label>
 									<input type="text" ng-model="client_city" class="form-control" placeholder="City">
 								</div>
 							</div>
-						</div>
-						<div class="row">
 							<div class="col-lg col-md col-sm">
 								<div class="form-group">
 									<label>Address</label>
 									<input type="text" ng-model="client_st_add" class="form-control" placeholder="Address">
 								</div>
 							</div>
+						</div>
+						<div class="row">
 							<div class="col-lg col-md col-sm">
 								<div class="form-group">
 									<label>Source</label>
 									<input type="text" ng-model="client_source" class="form-control" placeholder="Source">
+								</div>
+							</div>
+							<div class="col-lg col-md col-sm">
+								<div class="form-group">
+									<label>Source ID</label>
+									<input type="text" ng-model="client_source_id" class="form-control" placeholder="Source ID">
 								</div>
 							</div>
 						</div>
@@ -162,28 +180,42 @@
 						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label>Country</label>
-									<input type="text" ng-model="client_country" class="form-control" placeholder="Country">
+									<label>Phone</label>
+									<input type="text" ng-model="client_phone" class="form-control" placeholder="Phone">
 								</div>
 							</div>
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label>City</label>
-									<input type="text" ng-model="client_city" class="form-control" placeholder="City">
+									<label>Country</label>
+									<input type="text" ng-model="client_country" class="form-control" placeholder="Country">
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label>Street Address</label>
-									<input type="text" ng-model="client_st_add" class="form-control" placeholder="Street Address">
+									<label>City</label>
+									<input type="text" ng-model="client_city" class="form-control" placeholder="City">
 								</div>
 							</div>
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
+									<label>Street Address</label>
+									<input type="text" ng-model="client_st_add" class="form-control" placeholder="Street Address">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
 									<label>Source</label>
 									<input type="text" ng-model="client_source" class="form-control" placeholder="Source">
+								</div>
+							</div>
+							<div class="col-lg col-md col-sm">
+								<div class="form-group">
+									<label>Source ID</label>
+									<input type="text" ng-model="client_source_id" class="form-control" placeholder="Source ID">
 								</div>
 							</div>
 						</div>
@@ -207,6 +239,8 @@
 						<dd class="col-md-7 col-lg-8">{{client_name}}</dd>
 						<dt class="col-md-5 col-lg-4">Email</dt>
 						<dd class="col-md-7 col-lg-8">{{client_email}}</dd>
+						<dt class="col-md-5 col-lg-4">Phone</dt>
+						<dd class="col-md-7 col-lg-8">{{client_phone}}</dd>
 						<dt class="col-md-5 col-lg-4">Country</dt>
 						<dd class="col-md-7 col-lg-8">{{client_country}}</dd>
 						<dt class="col-md-5 col-lg-4">City</dt>
@@ -215,6 +249,8 @@
 						<dd class="col-md-7 col-lg-8">{{client_st_add}}</dd>
 						<dt class="col-md-5 col-lg-4">Source</dt>
 						<dd class="col-md-7 col-lg-8">{{client_source}}</dd>
+						<dt class="col-md-5 col-lg-4">Source ID</dt>
+						<dd class="col-md-7 col-lg-8">{{client_source_id}}</dd>
 					</dl>
 				</div>
 			</div>
