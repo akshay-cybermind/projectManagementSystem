@@ -52,7 +52,7 @@
 						<th>Project Details</th>
 						<th>Project Url</th>
 						<th>Start Date</th>
-						<th>Completion Date</th>
+						<th>End Date</th>
 						<th>Budget</th>
 						<th>Payment Mode</th>
 						<th>Action</th>
@@ -69,7 +69,7 @@
 						<td>{{ project.completion_date }}</td>
 						<td>{{ project.budget }}</td>
 						<td>{{ project.payment_mode }}</td>
-						<td>
+						<td width="160">
 							<button class="btn btn-warning" data-toggle="modal" data-target="#showData" ng-click="showData(project)"><i class="fa fa-eye"></i></button>&nbsp;
 							<button class="btn btn-primary" data-toggle="modal" data-target="#editData" ng-click="editData(project)"><i class="fa fa-pencil"></i></button>&nbsp;
 							<button class="btn btn-danger" ng-click="deleteData(project)"><i class="fa fa-trash"></i></button>
@@ -82,8 +82,6 @@
 		<hr>
 
 		<button class="btn btn-success" ng-click="showForm()" data-toggle="modal" data-target="#addData">Add Project <i class="fa fa-plus"></i></button>
-
-		
 	</div>
 
 	<div class="modal fade" id="addData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-show="addFormShow">
@@ -99,13 +97,13 @@
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Project Name</label>
-									<input type="text" ng-model="project_name" class="form-control" placeholder="Project Name">
+									<input type="text" ng-model="project_name" class="form-control" placeholder="Project Name" required="required">
 								</div>
 							</div>
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Client Name</label>
-									<input type="text" ng-model="client_name" class="form-control" placeholder="Client Name">
+									<input type="text" ng-model="client_name" class="form-control" placeholder="Client Name" required="required">
 								</div>
 							</div>
 						</div>
@@ -113,7 +111,7 @@
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Project Type</label>
-									<input type="text" ng-model="project_type" class="form-control" placeholder="Project Type">
+									<input type="text" ng-model="project_type" class="form-control" placeholder="Project Type" required="required">
 								</div>
 							</div>
 							<div class="col-md-6 col-sm-6">
@@ -127,7 +125,7 @@
 							<div class="col-md-12 col-sm-12">
 								<div class="form-group">
 									<label>Project Details</label>
-									<textarea ng-model="project_details" class="form-control" placeholder="Project Details" rows="5"></textarea>
+									<textarea ng-model="project_details" class="form-control" placeholder="Project Details" rows="5" required="required"></textarea>
 								</div>
 							</div>
 						</div>
@@ -136,7 +134,7 @@
 								<div class="form-group">
 									<label>Start Date</label>
 									<div class="input-group date" data-provide="datepicker">
-										<input type="text" ng-model="start_date" class="form-control" placeholder="Start Date">
+										<input type="text" ng-model="start_date" class="form-control" placeholder="Start Date" required="required">
 										<div class="input-group-addon">
 											<span class="fa fa-calendar"></span>
 										</div>
@@ -159,13 +157,13 @@
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Budget</label>
-									<input type="text" ng-model="budget" class="form-control" placeholder="Budget">
+									<input type="text" ng-model="budget" class="form-control" placeholder="Budget" required="required">
 								</div>
 							</div>
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Payment Mode</label>
-									<input type="text" ng-model="payment_mode" class="form-control" placeholder="Payment Mode">
+									<input type="text" ng-model="payment_mode" class="form-control" placeholder="Payment Mode" required="required">
 								</div>
 							</div>
 						</div>
