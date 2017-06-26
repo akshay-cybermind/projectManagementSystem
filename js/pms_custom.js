@@ -41,9 +41,14 @@ pmsApp
 	}
 
 	$scope.addFormSubmit=function() {
+
+        //alert($scope.client_name);
+       //  alert($scope.client_name.client_name);
+		//var record=$scope.projects.$getRecord($scope.client_name.$id);
 		$scope.projects.$add({
 			project_name:$scope.project_name,
 			client_name:$scope.client_name,
+			
 			project_type:$scope.project_type,
 			project_details:$scope.project_details,
 			project_url:$scope.project_url,
@@ -137,7 +142,6 @@ pmsApp
 	}
 
 	$scope.addFormSubmit=function() {
-		alert("hello");
 		$scope.getClients.$add({
 			client_name:$scope.client_name,
 			client_email:$scope.client_email,

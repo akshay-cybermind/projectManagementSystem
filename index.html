@@ -48,6 +48,7 @@
 					<tr>
 						<th>Project Name</th>
 						<th>Client Name</th>
+						<!-- <th>Client ID</th> -->
 						<th>Project Type</th>
 						<!-- <th>Project Details</th> -->
 						<th>Project Url</th>
@@ -61,7 +62,10 @@
 				<tbody>
 					<tr ng-repeat="project in projects">
 						<td>{{ project.project_name }}</td>
-						<td>{{ project.client_name }}</td>
+						<td>{{ getClients.$getRecord(project.client_name).client_name }}</td>
+
+						<!-- this is id of client_name -->
+						<!-- <td>{{ project.client_name }}</td> -->
 						<td>{{ project.project_type }}</td>
 						<!-- <td>{{ project.project_details }}</td> -->
 						<td>{{ project.project_url }}</td>
@@ -104,7 +108,8 @@
 								<div class="form-group">
 									<label>Client Name</label>
 									<select class="form-control" ng-model="client_name">
-										<option ng-repeat="client in getClients" value="{{ client.client_name }}" >{{ client.client_name }}</option>
+										<option selected="true" disabled="disabled" value="">Select a client</option>
+										<option ng-repeat="client in getClients" value="{{ client.$id }}" >{{ client.client_name }}</option>
 									</select>
 								</div>
 							</div>
@@ -196,7 +201,7 @@
 								<div class="form-group">
 									<label>Client Name</label>
 									<select class="form-control" ng-model="client_name">
-										<option ng-repeat="client in getClients" value="{{ client.client_name }}" >{{ client.client_name }}</option>
+										<option ng-repeat="client in getClients" value="{{client.$id}}" >{{ client.client_name }}</option>
 									</select>
 								</div>
 							</div>
