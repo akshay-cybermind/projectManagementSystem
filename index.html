@@ -34,7 +34,7 @@
 
 </head>
 <body ng-app="pmsApp">
-<div ng-controller="CController">
+<div ng-controller="PrController">
 	<header class="header">
 		<div class="container-fluid">
 			<h1>Project Management System</h1>
@@ -43,8 +43,8 @@
 	<div class="container-fluid">
 		<h3>Project List</h3>
 		<div class="table-responsive">
-			<table class="table table-striped">
-				<thead>
+			<table class="table table-striped table-hover">
+				<thead class="thead-inverse">
 					<tr>
 						<th>Project Name</th>
 						<th>Client Name</th>
@@ -55,7 +55,7 @@
 						<th>End Date</th>
 						<!-- <th>Budget</th> -->
 						<!-- <th>Payment Mode</th> -->
-						<th>Action</th>
+						<th width="160">Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -70,9 +70,9 @@
 						<!-- <td>{{ project.budget }}</td> -->
 						<!-- <td>{{ project.payment_mode }}</td> -->
 						<td width="160">
-							<button class="btn btn-warning" data-toggle="modal" data-target="#showData" ng-click="showData(project)"><i class="fa fa-eye"></i></button>&nbsp;
-							<button class="btn btn-primary" data-toggle="modal" data-target="#editData" ng-click="editData(project)"><i class="fa fa-pencil"></i></button>&nbsp;
-							<button class="btn btn-danger" ng-click="deleteData(project)"><i class="fa fa-trash"></i></button>
+							<button class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#showData" ng-click="showData(project)"><i class="fa fa-eye"></i></button>&nbsp;
+							<button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#editData" ng-click="editData(project)"><i class="fa fa-pencil"></i></button>&nbsp;
+							<button class="btn btn-outline-danger btn-sm" ng-click="deleteData(project)"><i class="fa fa-trash"></i></button>
 						</td>
 					</tr>
 				</tbody>
@@ -81,11 +81,11 @@
 
 		<hr>
 
-		<button class="btn btn-success" ng-click="showForm()" data-toggle="modal" data-target="#addData">Add Project <i class="fa fa-plus"></i></button>
+		<button class="btn btn-success" ng-click="showForm()" data-toggle="modal" data-target="#addData">Add a Project <i class="fa fa-plus"></i></button>
 	</div>
 
 	<div class="modal fade" id="addData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-show="addFormShow">
-		<div class="modal-dialog" role="document" >
+		<div class="modal-dialog modal-lg" role="document" >
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -94,27 +94,29 @@
 				<div class="modal-body">
 					<form ng-submit="addFormSubmit()" id="addForm">
 						<div class="row">
-							<div class="col-md-6 col-sm-6">
+							<div class="col-lg col-md col-sm">
 								<div class="form-group">
 									<label>Project Name</label>
 									<input type="text" ng-model="project_name" class="form-control" placeholder="Project Name" required="required">
 								</div>
 							</div>
-							<div class="col-md-6 col-sm-6">
+							<div class="col-lg col-md col-sm">
 								<div class="form-group">
 									<label>Client Name</label>
-									<input type="text" ng-model="client_name" class="form-control" placeholder="Client Name" required="required">
+									<select class="form-control" ng-model="client_name">
+										<option ng-repeat="client in getClients" value="{{ client.client_name }}" >{{ client.client_name }}</option>
+									</select>
 								</div>
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-6 col-sm-6">
+							<div class="col-lg col-md col-sm">
 								<div class="form-group">
 									<label>Project Type</label>
 									<input type="text" ng-model="project_type" class="form-control" placeholder="Project Type" required="required">
 								</div>
 							</div>
-							<div class="col-md-6 col-sm-6">
+							<div class="col-lg col-md col-sm">
 								<div class="form-group">
 									<label>Project Url</label>
 									<input type="text" ng-model="project_url" class="form-control" placeholder="Project Url">
@@ -122,7 +124,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-12 col-sm-12">
+							<div class="col">
 								<div class="form-group">
 									<label>Project Details</label>
 									<textarea ng-model="project_details" class="form-control" placeholder="Project Details" rows="5" required="required"></textarea>
@@ -130,7 +132,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-6 col-sm-6">
+							<div class="col-lg col-md col-sm">
 								<div class="form-group">
 									<label>Start Date</label>
 									<div class="input-group date" data-provide="datepicker">
@@ -141,7 +143,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-6 col-sm-6">
+							<div class="col-lg col-md col-sm">
 								<div class="form-group">
 									<label>Completion Date</label>
 									<div class="input-group date" data-provide="datepicker">
@@ -154,20 +156,20 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-6 col-sm-6">
+							<div class="col-lg col-md col-sm">
 								<div class="form-group">
 									<label>Budget</label>
 									<input type="text" ng-model="budget" class="form-control" placeholder="Budget" required="required">
 								</div>
 							</div>
-							<div class="col-md-6 col-sm-6">
+							<div class="col-lg col-md col-sm">
 								<div class="form-group">
 									<label>Payment Mode</label>
 									<input type="text" ng-model="payment_mode" class="form-control" placeholder="Payment Mode" required="required">
 								</div>
 							</div>
 						</div>
-						<button type="submit" class="btn btn-default btn-success">Add Project</button>
+						<button type="submit" class="btn btn-default btn-success">Add a Project</button>
 					</form>
 				</div>
 			</div>
@@ -175,11 +177,11 @@
 	</div>
 
 	<div class="modal fade" id="editData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Update Project</h4>
+					<h4 class="modal-title" id="myModalLabel">Update Project Info</h4>
 				</div>
 				<div class="modal-body" ng-show="editFormShow">
 					<form ng-submit="editFormSubmit()">
@@ -193,7 +195,9 @@
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Client Name</label>
-									<input type="text" ng-model="client_name" class="form-control" placeholder="Client Name">
+									<select class="form-control" ng-model="client_name">
+										<option ng-repeat="client in getClients" value="{{ client.client_name }}" >{{ client.client_name }}</option>
+									</select>
 								</div>
 							</div>
 						</div>
@@ -257,7 +261,7 @@
 								</div>
 							</div>
 						</div>
-						<button type="submit" class="btn btn-default btn-success">Update Project</button>
+						<button type="submit" class="btn btn-default btn-success">Update Project Info</button>
 					</form>
 				</div>
 			</div>
@@ -265,32 +269,32 @@
 	</div>
 
 	<div class="modal fade" id="showData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Full Detail</h4>
+					<h4 class="modal-title" id="myModalLabel">View Project Details</h4>
 				</div>
-				<div class="modal-body" ng-show="detailsShow">
-					<dl class="dl-horizontal">
-						<dt>Project Name</dt>
-						<dd>{{project_name}}</dd>
-						<dt>Client Name</dt>
-						<dd>{{client_name}}</dd>
-						<dt>Project Type</dt>
-						<dd>{{project_type}}</dd>
-						<dt>Project Url</dt>
-						<dd>{{project_url}}</dd>
-						<dt>Project Details</dt>
-						<dd>{{project_details}}</dd>
-						<dt>Start Date</dt>
-						<dd>{{start_date}}</dd>
-						<dt>Completion Date</dt>
-						<dd>{{completion_date}}</dd>
-						<dt>Budget</dt>
-						<dd>{{budget}}</dd>
-						<dt>Payment Mode</dt>
-						<dd>{{payment_mode}}</dd>
+				<div class="modal-body projectDetails" ng-show="detailsShow">
+					<dl class="row">
+						<dt class="col-md-5 col-lg-4">Project Name</dt>
+						<dd class="col-md-7 col-lg-8">{{ project_name }}</dd>
+						<dt class="col-md-5 col-lg-4">Client Name</dt>
+						<dd class="col-md-7 col-lg-8">{{ client_name }}</dd>
+						<dt class="col-md-5 col-lg-4">Project Type</dt>
+						<dd class="col-md-7 col-lg-8">{{ project_type }}</dd>
+						<dt class="col-md-5 col-lg-4">Project Url</dt>
+						<dd class="col-md-7 col-lg-8">{{ project_url }}</dd>
+						<dt class="col-md-5 col-lg-4">Project Details</dt>
+						<dd class="col-md-7 col-lg-8">{{ project_details }}</dd>
+						<dt class="col-md-5 col-lg-4">Start Date</dt>
+						<dd class="col-md-7 col-lg-8">{{ start_date }}</dd>
+						<dt class="col-md-5 col-lg-4">Completion Date</dt>
+						<dd class="col-md-7 col-lg-8">{{ completion_date }}</dd>
+						<dt class="col-md-5 col-lg-4">Budget</dt>
+						<dd class="col-md-7 col-lg-8">{{ budget }}</dd>
+						<dt class="col-md-5 col-lg-4">Payment Mode</dt>
+						<dd class="col-md-7 col-lg-8">{{ payment_mode }}</dd>
 					</dl>
 				</div>
 			</div>

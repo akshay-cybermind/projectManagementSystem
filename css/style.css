@@ -1,3 +1,10 @@
+body {
+	font-size: 14px;
+}
+.btn {
+	cursor: pointer;
+}
+
 .header {
 	background-color: #0384ce;
 	padding: 15px 0;
@@ -6,4 +13,11 @@
 	color: #ffffff;
 	font-size: 22px;
 	margin: 0;
+}
+
+.projectDetails dl dt {
+	text-align: left;
+}
+
+.projectDetails dl dd {
 }

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Management System</title>
+
+<!-- Bootstrap CSS -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<!-- FontAwesome -->
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<!-- Datepicker -->
+<link href="assets/datepicker/bootstrap-datepicker.css" rel="stylesheet">
+
+<!-- Bootstrap -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- Datepicker -->
+<script type="text/javascript" src="assets/datepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+	$('.datepicker').datepicker();
+</script>
+
+<!-- Angular JS -->
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/pms_custom.js"></script>
+<!-- Firebase -->
+<script type="text/javascript" src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+<!-- AngularFire -->
+<script type="text/javascript" src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+
+</head>
+<body ng-app="pmsApp">
+<div ng-controller="ClController">
+	<header class="header">
+		<div class="container-fluid">
+			<h1>Project Management System</h1>
+		</div>
+	</header>
+	<div class="container-fluid">
+		<h3>Clients List</h3>
+		<div class="table-responsive">
+			<table class="table table-striped table-hover">
+				<thead class="thead-inverse">
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Country</th>
+						<th>City</th>
+						<th>Street Address</th>
+						<th>Source</th>
+						<th width="160">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="client in getClients">
+						<td>{{ client.client_name }}</td>
+						<td>{{ client.client_email }}</td>
+						<td>{{ client.client_country }}</td>
+						<td>{{ client.client_city }}</td>
+						<td>{{ client.client_st_add }}</td>
+						<td>{{ client.client_source }}</td>
+						<td width="160">
+							<button class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#showData" ng-click="showData(client)"><i class="fa fa-eye"></i></button>&nbsp;
+							<button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#editData" ng-click="editData(client)"><i class="fa fa-pencil"></i></button>&nbsp;
+							<button class="btn btn-outline-danger btn-sm" ng-click="deleteData(client)"><i class="fa fa-trash"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<hr>
+
+		<button class="btn btn-success" ng-click="showForm()" data-toggle="modal" data-target="#addData">Add a Client <i class="fa fa-plus"></i></button>
+	</div>
+
+	<div class="modal fade" id="addData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-show="addFormShow">
+		<div class="modal-dialog modal-lg" role="document" >
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Add a Client</h4>
+				</div>
+				<div class="modal-body">
+					<form ng-submit="addFormSubmit()" id="addForm">
+						<div class="row">
+							<div class="col-lg col-md col-sm">
+								<div class="form-group">
+									<label>Name</label>
+									<input type="text" ng-model="client_name" class="form-control" placeholder="Name" required="required">
+								</div>
+							</div>
+							<div class="col-lg col-md col-sm">
+								<div class="form-group">
+									<label>Email</label>
+									<input type="text" ng-model="client_email" class="form-control" placeholder="Email" required="required">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg col-md col-sm">
+								<div class="form-group">
+									<label>Country</label>
+									<input type="text" ng-model="client_country" class="form-control" placeholder="Country" required="required">
+								</div>
+							</div>
+							<div class="col-lg col-md col-sm">
+								<div class="form-group">
+									<label>City</label>
+									<input type="text" ng-model="client_city" class="form-control" placeholder="City">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg col-md col-sm">
+								<div class="form-group">
+									<label>Address</label>
+									<input type="text" ng-model="client_st_add" class="form-control" placeholder="Address">
+								</div>
+							</div>
+							<div class="col-lg col-md col-sm">
+								<div class="form-group">
+									<label>Source</label>
+									<input type="text" ng-model="client_source" class="form-control" placeholder="Source">
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-default btn-success">Add Client</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="editData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Update Client Info</h4>
+				</div>
+				<div class="modal-body" ng-show="editFormShow">
+					<form ng-submit="editFormSubmit()">
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Name</label>
+									<input type="text" ng-model="client_name" class="form-control" placeholder="Name">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Email</label>
+									<input type="text" ng-model="client_email" class="form-control" placeholder="Email">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Country</label>
+									<input type="text" ng-model="client_country" class="form-control" placeholder="Country">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>City</label>
+									<input type="text" ng-model="client_city" class="form-control" placeholder="City">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Street Address</label>
+									<input type="text" ng-model="client_st_add" class="form-control" placeholder="Street Address">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Source</label>
+									<input type="text" ng-model="client_source" class="form-control" placeholder="Source">
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-default btn-success">Update Client Info</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="showData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">View Client Info</h4>
+				</div>
+				<div class="modal-body projectDetails" ng-show="detailsShow">
+					<dl class="row">
+						<dt class="col-md-5 col-lg-4">Name</dt>
+						<dd class="col-md-7 col-lg-8">{{client_name}}</dd>
+						<dt class="col-md-5 col-lg-4">Email</dt>
+						<dd class="col-md-7 col-lg-8">{{client_email}}</dd>
+						<dt class="col-md-5 col-lg-4">Country</dt>
+						<dd class="col-md-7 col-lg-8">{{client_country}}</dd>
+						<dt class="col-md-5 col-lg-4">City</dt>
+						<dd class="col-md-7 col-lg-8">{{client_city}}</dd>
+						<dt class="col-md-5 col-lg-4">Street Address</dt>
+						<dd class="col-md-7 col-lg-8">{{client_st_add}}</dd>
+						<dt class="col-md-5 col-lg-4">Source</dt>
+						<dd class="col-md-7 col-lg-8">{{client_source}}</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+</body>
+</html>

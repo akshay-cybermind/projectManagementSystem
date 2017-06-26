@@ -8,11 +8,16 @@ pmsApp
 	// console.log($rootScope.jyotishes);
 })
 
-.controller('CController', ['$scope','$rootScope','$firebaseArray','$log', function($scope,$rootScope,$firebaseArray,$log) {
+.controller('PrController', ['$scope','$rootScope','$firebaseArray','$log', function($scope,$rootScope,$firebaseArray,$log) {
 
-	var myProjects = new Firebase('https://clientinfosys.firebaseio.com/project');
+	var myProjects = new Firebase('https://projectmanagementsystem-de50f.firebaseio.com/project');
 
 	$scope.projects = $firebaseArray(myProjects);
+
+
+	var myClients = new Firebase('https://projectmanagementsystem-de50f.firebaseio.com/clients');
+
+	$scope.getClients = $firebaseArray(myClients);
 
 	$scope.showForm = function() {
 		$scope.addFormShow = true;
@@ -79,11 +84,9 @@ pmsApp
 		$scope.completion_date = project.completion_date;
 		$scope.budget = project.budget;
 		$scope.payment_mode = project.payment_mode;
-
-		$scope.id=project.$id;  
 	}
 
-	$scope.editFormSubmit=function() {
+	$scope.editFormSubmit=function(project,id) {
 		var id=$scope.id;
 		var record=$scope.projects.$getRecord(id);
 
@@ -103,6 +106,91 @@ pmsApp
 	$scope.deleteData=function(parent) {
 		if (confirm('Are you sure you want to delete this?')) {
 			$scope.projects.$remove(parent);
+		}
+	}
+}])
+
+
+// Customs for Clients
+.controller('ClController', ['$scope','$rootScope','$firebaseArray','$log', function($scope,$rootScope,$firebaseArray,$log) {
+
+	var myClients = new Firebase('https://projectmanagementsystem-de50f.firebaseio.com/clients');
+
+	$scope.getClients = $firebaseArray(myClients);
+
+	$scope.showForm = function() {
+		$scope.addFormShow = true;
+		$scope.editFormShow = false;
+		clearForm();
+	}
+	$scope.hideForm = function(){
+		$scope.addFormShow = false;
+	}
+
+	function clearForm() {
+		$scope.client_name = '';
+		$scope.client_email = '';
+		$scope.client_country = '';
+		$scope.client_city = '';
+		$scope.client_st_add = '';
+		$scope.client_source = '';
+	}
+
+	$scope.addFormSubmit=function() {
+		alert("hello");
+		$scope.getClients.$add({
+			client_name:$scope.client_name,
+			client_email:$scope.client_email,
+			client_country:$scope.client_country,
+			client_city:$scope.client_city,
+			client_st_add:$scope.client_st_add,
+			client_source:$scope.client_source,
+			});
+		clearForm();
+	}
+
+	$scope.editData = function(client,id) {
+		$scope.addFormShow = false;
+		$scope.editFormShow = true;
+
+		$scope.client_name = client.client_name;
+		$scope.client_email = client.client_email;
+		$scope.client_country = client.client_country;
+		$scope.client_city = client.client_city;
+		$scope.client_st_add = client.client_st_add;
+		$scope.client_source = client.client_source;
+
+		$scope.id=client.$id;  
+	}
+
+	$scope.showData = function(client,id) {
+		$scope.detailsShow = true;
+
+		$scope.client_name = client.client_name;
+		$scope.client_email = client.client_email;
+		$scope.client_country = client.client_country;
+		$scope.client_city = client.client_city;
+		$scope.client_st_add = client.client_st_add;
+		$scope.client_source = client.client_source;
+	}
+
+	$scope.editFormSubmit=function(client,id) {
+		var id=$scope.id;
+		var record=$scope.getClients.$getRecord(id);
+
+		record.client_name=$scope.client_name;
+		record.client_email=$scope.client_email;
+		record.client_country=$scope.client_country;
+		record.client_city=$scope.client_city;
+		record.client_st_add=$scope.client_st_add;
+		record.client_source=$scope.client_source;
+
+		$scope.getClients.$save(record);
+	}
+
+	$scope.deleteData=function(parent) {
+		if (confirm('Are you sure you want to delete this?')) {
+			$scope.getClients.$remove(parent);
 		}
 	}
 }]);
