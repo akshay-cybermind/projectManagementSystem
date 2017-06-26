@@ -135,6 +135,7 @@ pmsApp
 	function clearForm() {
 		$scope.client_name = '';
 		$scope.client_email = '';
+		$scope.client_phone = '';
 		$scope.client_country = '';
 		$scope.client_city = '';
 		$scope.client_st_add = '';
@@ -145,6 +146,7 @@ pmsApp
 		$scope.getClients.$add({
 			client_name:$scope.client_name,
 			client_email:$scope.client_email,
+			client_phone:$scope.client_phone,
 			client_country:$scope.client_country,
 			client_city:$scope.client_city,
 			client_st_add:$scope.client_st_add,
@@ -159,6 +161,7 @@ pmsApp
 
 		$scope.client_name = client.client_name;
 		$scope.client_email = client.client_email;
+		$scope.client_phone = client.client_phone;
 		$scope.client_country = client.client_country;
 		$scope.client_city = client.client_city;
 		$scope.client_st_add = client.client_st_add;
@@ -172,6 +175,7 @@ pmsApp
 
 		$scope.client_name = client.client_name;
 		$scope.client_email = client.client_email;
+		$scope.client_phone = client.client_phone;
 		$scope.client_country = client.client_country;
 		$scope.client_city = client.client_city;
 		$scope.client_st_add = client.client_st_add;
@@ -184,6 +188,7 @@ pmsApp
 
 		record.client_name=$scope.client_name;
 		record.client_email=$scope.client_email;
+		record.client_phone=$scope.client_phone;
 		record.client_country=$scope.client_country;
 		record.client_city=$scope.client_city;
 		record.client_st_add=$scope.client_st_add;
