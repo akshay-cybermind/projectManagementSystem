@@ -42,8 +42,8 @@ pmsApp
 
 	$scope.addFormSubmit=function() {
 
-        //alert($scope.client_name);
-       //  alert($scope.client_name.client_name);
+		//alert($scope.client_name);
+	   //  alert($scope.client_name.client_name);
 		//var record=$scope.projects.$getRecord($scope.client_name.$id);
 		$scope.projects.$add({
 			project_name:$scope.project_name,
@@ -122,7 +122,8 @@ pmsApp
 	var myClients = new Firebase('https://projectmanagementsystem-de50f.firebaseio.com/clients');
 
 	$scope.getClients = $firebaseArray(myClients);
-
+	$scope.getClientsTotal = $firebaseArray(myClients);
+	//$scope.tempClients = $firebaseArray(myClients);
 	$scope.showForm = function() {
 		$scope.addFormShow = true;
 		$scope.editFormShow = false;
@@ -140,6 +141,7 @@ pmsApp
 		$scope.client_city = '';
 		$scope.client_st_add = '';
 		$scope.client_source = '';
+		$scope.client_source_id = '';
 	}
 
 	$scope.addFormSubmit=function() {
@@ -151,6 +153,7 @@ pmsApp
 			client_city:$scope.client_city,
 			client_st_add:$scope.client_st_add,
 			client_source:$scope.client_source,
+			client_source_id:$scope.client_source_id,
 			});
 		clearForm();
 	}
@@ -166,6 +169,7 @@ pmsApp
 		$scope.client_city = client.client_city;
 		$scope.client_st_add = client.client_st_add;
 		$scope.client_source = client.client_source;
+		$scope.client_source_id = client.client_source_id;
 
 		$scope.id=client.$id;  
 	}
@@ -180,6 +184,7 @@ pmsApp
 		$scope.client_city = client.client_city;
 		$scope.client_st_add = client.client_st_add;
 		$scope.client_source = client.client_source;
+		$scope.client_source_id = client.client_source_id;
 	}
 
 	$scope.editFormSubmit=function(client,id) {
@@ -193,6 +198,7 @@ pmsApp
 		record.client_city=$scope.client_city;
 		record.client_st_add=$scope.client_st_add;
 		record.client_source=$scope.client_source;
+		record.client_source_id=$scope.client_source_id;
 
 		$scope.getClients.$save(record);
 	}
@@ -202,4 +208,105 @@ pmsApp
 			$scope.getClients.$remove(parent);
 		}
 	}
+
+
+	// search function(dynamic) veshraj -- not working
+	/*$scope.search = function(totalrows,searchStrig){
+	var tablerows=[];
+	if(searchStrig==undefined) return totalrows;
+	$tokens=searchStrig.split(" ");
+	$tokenlength=$tokens.length;
+	if(searchStrig=="")
+		{
+			alert("");
+		   $scope.getClients = $firebaseArray(myClients);
+		}
+		if(totalrows.length>0)
+		{
+			$keys=Object.keys(totalrows[0]);
+			$keylength=$keys.length;
+
+			$totalrecords=totalrows.length;
+			j=0;
+			for(j;j<$totalrecords;j++)
+			{
+				$found=true;
+				$rowstring="";
+				for(key=0;key<$keylength;key++)
+				{
+					$rowstring+=" "+totalrows[j][$keys[key]];
+				}
+				for(i=0;i<$tokenlength;i++)
+				{
+					$rowstring=$rowstring.toUpperCase();
+					if($rowstring.indexOf($tokens[i].toUpperCase())==-1)
+					{
+						$found=false;
+					}
+				}
+
+				if($found)
+				{
+					if(tablerows.indexOf(totalrows[j])==-1)
+					{
+						tablerows.push(totalrows[j]);   
+					}
+					
+				}
+			}
+		}  
+		$scope.getClients=tablerows;
+	}*/
+
+	
+
+
+	// search function by veshraj -- 'getClients' is the value in ng-repeat in html file
+	/*$scope.searchFunction=function(){
+		$string=$scope.search_string;
+		if($string==undefined) return false;
+		$tokens=$string.split(" ");
+		$scope.getClients=[];
+		$tokenlength=$tokens.length;
+		if($scope.search_string=="")
+		{
+			$scope.getClients=$scope.getClientsTotal;
+		}
+		   
+		if($scope.getClientsTotal.length>0)
+		{
+			$keys=Object.keys($scope.getClientsTotal[0]);
+			$keylength=$keys.length;
+
+			$totalrecords=$scope.getClientsTotal.length;
+			j=0;
+			for(j;j<$totalrecords;j++)
+			{
+				$found=true;
+				$rowstring="";
+				for(key=0;key<$keylength;key++)
+				{
+					$rowstring+=" "+$scope.getClientsTotal[j][$keys[key]];
+				}
+				for(i=0;i<$tokenlength;i++)
+				{
+					$rowstring=$rowstring.toUpperCase();
+					if($rowstring.indexOf($tokens[i].toUpperCase())==-1)
+					{
+						$found=false;
+					}
+				}
+
+				if($found)
+				{
+					if($scope.getClients.indexOf($scope.getClientsTotal[j])==-1)
+					{
+						$scope.getClients.push($scope.getClientsTotal[j]);   
+					}
+					
+				}
+			}
+		}
+	}*/
+
 }]);

@@ -1,4 +1,5 @@
 body {
+	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
 }
 .btn {
@@ -51,6 +52,14 @@ body {
 	border-color: #ffffff;
 	color: #ffffff;
 }
+.dropdown-menu {
+	border-radius: 0;
+	margin: 0;
+}
+.dropdown-item {
+	padding-left: 0.8rem;
+	padding-right: 0.8rem;
+}
 @media (min-width: 992px) {
 	.navbar-brand {
 		display: none;
@@ -68,4 +77,23 @@ body {
 }
 
 .projectDetails dl dd {
+}
+.tabletitle {
+	margin-top: 20px;
+}
+.searchform {
+	position: relative;
+}
+.searchform .searchicon {
+	color: #999999;
+	font-size: 1.2em;
+	left: 12px;
+	position: absolute;
+	top: 5px;
+}
+.searchform .form-control {
+	padding-left: 35px;
+}
+.table thead th {
+	font-weight: 500;
 }
