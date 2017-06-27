@@ -36,43 +36,45 @@
 
 </head>
 <body ng-app="pmsApp">
-<div ng-controller="PrController">
-	<header class="header">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-4 hidden-md-down">
-					<h1 class="projectTitle">Project Management System</h1>
-				</div>
-				<div class="col-lg-8">
-					<nav class="navbar navbar-toggleable-md navbar-light">
-						<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<a class="navbar-brand projectTitle" href="#">Project Management System</a>
+<header class="header">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-4 hidden-md-down">
+				<h1 class="projectTitle">Project Management System</h1>
+			</div>
+			<div class="col-lg-8">
+				<nav class="navbar navbar-toggleable-md navbar-light">
+					<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<a class="navbar-brand projectTitle" href="#">Project Management System</a>
 
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav mr-auto">
-								<li class="nav-item dropdown active">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Projects</a>
-									<ul class="dropdown-menu dropdown-menu-right">
-										<li><a class="dropdown-item active" href="index.html">View Projects</a></li>
-										<li><a class="dropdown-item" href="#">Add Project</a></li>
-									</ul>
-								</li>
-								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Clients</a>
-									<ul class="dropdown-menu dropdown-menu-right">
-										<li><a class="dropdown-item" href="clients.html">View Clients</a></li>
-										<li><a class="dropdown-item" href="#">Add Client</a></li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-					</nav>
-				</div>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item dropdown active">
+								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Projects</a>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><a class="dropdown-item active" href="index.html">View Projects</a></li>
+									<li><a class="dropdown-item" href="#">Add Project</a></li>
+								</ul>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Clients</a>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><a class="dropdown-item" href="clients.html">View Clients</a></li>
+									<li><a class="dropdown-item" href="#">Add Client</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
 			</div>
 		</div>
-	</header>
+	</div>
+</header>
+<!-- //header -->
+
+<div ng-controller="PrController">	
 	<div class="container-fluid">
 		<div class="tabletitle">
 			<div class="row">
@@ -358,7 +360,10 @@
 
 </div>
 
-
+<footer class="footer">
+	<p class="text-center">&copy; 2017 Project Management System. Powered by <a href="http://www.riseofaryan.com">riseofaryan.com</a></p>
+</footer>
+<!-- //footer -->
 
 
 </body>
