@@ -1,4 +1,24 @@
-var pmsApp = angular.module('pmsApp', ['firebase']);
+//var pmsApp = angular.module('pmsApp', ['firebase']);
+
+var pmsApp = angular.module("pmsApp", ['firebase',"ngRoute"]);
+
+/* ngRoute - to make ng-view work */
+pmsApp.config(['$routeProvider',function($routeProvider) {
+	$routeProvider
+	.when("/", {
+		templateUrl : "projects.html"
+	})
+	.when("/clients", {
+		templateUrl : "clients.html"
+	})
+	.when("/projects", {
+		templateUrl : "projects.html"
+	})
+	.otherwise({
+		redirectTo : '/'
+	});
+}]);
+
 
 pmsApp
 
@@ -7,6 +27,16 @@ pmsApp
 	// $rootScope.jyotishes=$firebaseArray(myjyotish);
 	// console.log($rootScope.jyotishes);
 })
+
+// .controller('headerController', ['$scope','$rootScope','$firebaseArray','$log','$route', function($scope,$rootScope,$firebaseArray,$log,$route) {
+// 	$scope.activeFunction = function($object) {
+// 		console.log($route);
+// 		var path = $route.current.originalPath;
+// 		var menu = document.querySelectorAll('li a[href="#!'+path+'"]').className += " active";
+// 		alert(menu[0].className);
+// 		$object.addClass += " active";
+// 	}
+// }])
 
 .controller('PrController', ['$scope','$rootScope','$firebaseArray','$log', function($scope,$rootScope,$firebaseArray,$log) {
 

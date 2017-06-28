@@ -1,80 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Project Management System</title>
-
-<!-- Bootstrap CSS -->
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<!-- FontAwesome -->
-<link href="css/font-awesome.min.css" rel="stylesheet">
-<!-- Datepicker -->
-<link href="assets/datepicker/bootstrap-datepicker.css" rel="stylesheet">
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-<!-- Bootstrap -->
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<!-- Datepicker -->
-<script type="text/javascript" src="assets/datepicker/bootstrap-datepicker.js"></script>
-<script type="text/javascript">
-	$('.datepicker').datepicker();
-</script>
-
-<!-- Angular JS -->
-<script type="text/javascript" src="js/angular.min.js"></script>
-<script type="text/javascript" src="js/pms_custom.js"></script>
-<!-- Firebase -->
-<script type="text/javascript" src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
-<!-- AngularFire -->
-<script type="text/javascript" src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
-
-</head>
-<body ng-app="pmsApp">
-<header class="header">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-4 hidden-md-down">
-				<h1 class="projectTitle">Project Management System</h1>
-			</div>
-			<div class="col-lg-8">
-				<nav class="navbar navbar-toggleable-md navbar-light">
-					<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<a class="navbar-brand projectTitle" href="#">Project Management System</a>
-
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav mr-auto">
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Projects</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a class="dropdown-item" href="index.html">View Projects</a></li>
-									<li><a class="dropdown-item" href="#">Add Project</a></li>
-								</ul>
-							</li>
-							<li class="nav-item dropdown active">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Clients</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a class="dropdown-item active" href="clients.html">View Clients</a></li>
-									<li><a class="dropdown-item" href="#">Add Client</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</nav>
-			</div>
-		</div>
-	</div>
-</header>
-<!-- //header -->
-
-<div ng-controller="ClController">
+<div ng-controller="ClController" class="content">
 	<div class="container-fluid">
 		<div class="tabletitle">
 			<div class="row">
@@ -100,7 +24,7 @@
 						<th>Phone</th>
 						<th>Country</th>
 						<th>City</th>
-						<!-- <th>Street Address</th> -->
+						<th>Street Address</th>
 						<th>Source</th>
 						<th>Source ID</th>
 						<th width="160">Action</th>
@@ -113,7 +37,7 @@
 						<td>{{ client.client_phone }}</td>
 						<td>{{ client.client_country }}</td>
 						<td>{{ client.client_city }}</td>
-						<!-- <td>{{ client.client_st_add }}</td> -->
+						<td>{{ client.client_st_add }}</td>
 						<td>{{ client.client_source }}</td>
 						<td>{{ client.client_source_id }}</td>
 						<td width="160">
@@ -311,12 +235,3 @@
 	</div>
 
 </div>
-
-<footer class="footer">
-	<p class="text-center">&copy; 2017 Project Management System. Powered by <a href="http://www.riseofaryan.com">riseofaryan.com</a></p>
-</footer>
-<!-- //footer -->
-
-
-</body>
-</html>
