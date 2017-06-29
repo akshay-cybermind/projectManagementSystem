@@ -40,12 +40,27 @@
 <body ng-app="pmsApp">
 <div data-ng-include="'layout/header.html'"></div>
 
-<div ng-view>
-	Dashboard
+<div class="content">
+	<div ng-view class="container-fluid">
+		Dashboard
+	</div>
 </div>
 
 <div data-ng-include="'layout/footer.html'"></div>
 
+
+
+<!-- navigation - active -->
+<script type="text/javascript">
+$(document).on('ready',function() {
+	$(document).on('click','li.nav-item li a',function() {
+		$('li.nav-item li a').removeClass('active');
+		$('.nav-item .nav-link').removeClass('active');
+		$(this).addClass('active');
+		$(this).parents('.nav-item').find('.nav-link').addClass('active');
+	})
+})
+</script>
 
 </body>
 </html>

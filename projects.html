@@ -1,70 +1,70 @@
 <div ng-controller="PrController">	
-	<div class="container-fluid">
-		<div class="tabletitle">
-			<div class="row">
-				<div class="col-md-6 col-lg-6">
-					<h5 class="text-uppercase">Project List</h5>
-				</div>
-				<div class="col-md-6 col-lg-6">
-					<div class="form-group searchform">
-						<span class="searchicon"><i class="fa fa-search"></i></span>
-						<input type="text" name="" class="form-control searchfield" ng-model="search_string" placeholder="Search">
-					</div>
+	<div class="tabletitle">
+		<div class="row">
+			<div class="col-md-6 col-lg-6">
+				<h5 class="text-uppercase">Project List</h5>
+			</div>
+			<div class="col-md-6 col-lg-6">
+				<div class="form-group searchform">
+					<span class="searchicon"><i class="fa fa-search"></i></span>
+					<input type="text" name="" class="form-control searchfield" ng-model="search_string" placeholder="Search">
 				</div>
 			</div>
 		</div>
-		<!-- //tabletitle -->
-
-		<div class="table-responsive">
-			<table class="table table-striped table-hover">
-				<thead class="thead-inverse">
-					<tr>
-						<th>Project Name</th>
-						<th>Client Name</th>
-						<!-- <th>Client ID</th> -->
-						<th>Project Type</th>
-						<!-- <th>Project Details</th> -->
-						<th>Project Url</th>
-						<th>Start Date</th>
-						<th>End Date</th>
-						<!-- <th>Budget</th> -->
-						<!-- <th>Payment Mode</th> -->
-						<th width="160">Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="project in projects | filter:search_string">
-						<td>{{ project.project_name }}</td>
-						<td>{{ getClients.$getRecord(project.client_name).client_name }}</td>
-						<!-- this is id of client_name -->
-						<!-- <td>{{ project.client_name }}</td> -->
-						<td>{{ project.project_type }}</td>
-						<!-- <td>{{ project.project_details }}</td> -->
-						<td>{{ project.project_url }}</td>
-						<td>{{ project.start_date }}</td>
-						<td>{{ project.completion_date }}</td>
-						<!-- <td>{{ project.budget }}</td> -->
-						<!-- <td>{{ project.payment_mode }}</td> -->
-						<td width="160">
-							<button class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#showData" ng-click="showData(project)"><i class="fa fa-eye"></i></button>&nbsp;
-							<button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#editData" ng-click="editData(project)"><i class="fa fa-pencil"></i></button>&nbsp;
-							<button class="btn btn-outline-danger btn-sm" ng-click="deleteData(project)"><i class="fa fa-trash"></i></button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<!-- //table-responsive -->
-
-		<hr>
-
-		<button class="btn btn-success" ng-click="showForm()" data-toggle="modal" data-target="#addData">Add a Project <i class="fa fa-plus"></i></button>
 	</div>
+	<!-- //tabletitle -->
+
+	<div class="table-responsive">
+		<table class="table table-striped table-hover">
+			<thead class="thead-inverse">
+				<tr>
+					<th>Project Name</th>
+					<th>Client Name</th>
+					<!-- <th>Client ID</th> -->
+					<th>Project Type</th>
+					<!-- <th>Project Details</th> -->
+					<th>Project Url</th>
+					<!-- <th>Project Source Url</th> -->
+					<th>Start Date</th>
+					<th>End Date</th>
+					<!-- <th>Budget</th> -->
+					<!-- <th>Payment Mode</th> -->
+					<th width="160">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="project in projects | filter:search_string">
+					<td>{{ project.project_name }}</td>
+					<td>{{ getClients.$getRecord(project.client_name).client_name }}</td>
+					<!-- this is id of client_name -->
+					<!-- <td>{{ project.client_name }}</td> -->
+					<td>{{ project.project_type }}</td>
+					<!-- <td>{{ project.project_details }}</td> -->
+					<td>{{ project.project_url }}</td>
+					<!-- <td>{{ project.project_source_url }}</td> -->
+					<td>{{ project.start_date }}</td>
+					<td>{{ project.completion_date }}</td>
+					<!-- <td>{{ project.budget }}</td> -->
+					<!-- <td>{{ project.payment_mode }}</td> -->
+					<td width="160">
+						<button class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#showProjectData" ng-click="showData(project)"><i class="fa fa-eye"></i></button>&nbsp;
+						<button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#editProjectData" ng-click="editData(project)"><i class="fa fa-pencil"></i></button>&nbsp;
+						<button class="btn btn-outline-danger btn-sm" ng-click="deleteData(project)"><i class="fa fa-trash"></i></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- //table-responsive -->
+
+	<hr>
+
+	<button class="btn btn-success" ng-click="showForm()" data-toggle="modal" data-target="#addProjectData">Add a Project <i class="fa fa-plus"></i></button>
 
 
 
 
-	<div class="modal fade" id="addData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-show="addFormShow">
+	<div class="modal fade" id="addProjectData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-show="addFormShow">
 		<div class="modal-dialog modal-lg" role="document" >
 			<div class="modal-content">
 				<div class="modal-header">
@@ -157,7 +157,7 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="editData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="editProjectData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -249,7 +249,7 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="showData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="showProjectData" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -266,6 +266,8 @@
 						<dd class="col-md-7 col-lg-8">{{ project_type }}</dd>
 						<dt class="col-md-5 col-lg-4">Project Url</dt>
 						<dd class="col-md-7 col-lg-8">{{ project_url }}</dd>
+						<dt class="col-md-5 col-lg-4">Project Source Url</dt>
+						<dd class="col-md-7 col-lg-8">{{ project_source_url }}</dd>
 						<dt class="col-md-5 col-lg-4">Project Details</dt>
 						<dd class="col-md-7 col-lg-8">{{ project_details }}</dd>
 						<dt class="col-md-5 col-lg-4">Start Date</dt>

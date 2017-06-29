@@ -6,7 +6,7 @@ var pmsApp = angular.module("pmsApp", ['firebase',"ngRoute"]);
 pmsApp.config(['$routeProvider',function($routeProvider) {
 	$routeProvider
 	.when("/", {
-		templateUrl : "projects.html"
+		templateUrl : "dashboard.html"
 	})
 	.when("/clients", {
 		templateUrl : "clients.html"
@@ -14,11 +14,20 @@ pmsApp.config(['$routeProvider',function($routeProvider) {
 	.when("/projects", {
 		templateUrl : "projects.html"
 	})
+	.when("/addproject", {
+		templateUrl : "addproject.html"
+	})
+	.when("/addclient", {
+		templateUrl : "addclient.html"
+	})
 	.otherwise({
-		redirectTo : '/'
+		redirectTo : 'dashboard.html'
 	});
 }]);
 
+pmsApp.run(function($rootScope) {
+    $rootScope.url = "http://localhost/angular/projectManagementSystem";
+})
 
 pmsApp
 
@@ -29,24 +38,18 @@ pmsApp
 })
 
 // .controller('headerController', ['$scope','$rootScope','$firebaseArray','$log','$route', function($scope,$rootScope,$firebaseArray,$log,$route) {
-// 	$scope.activeFunction = function($object) {
-// 		console.log($route);
-// 		var path = $route.current.originalPath;
-// 		var menu = document.querySelectorAll('li a[href="#!'+path+'"]').className += " active";
-// 		alert(menu[0].className);
-// 		$object.addClass += " active";
-// 	}
+// 	$rootScope.openModal = function(modal)
+// 	{
+// 		$rootScope[modal] = true;
+// 	}	
 // }])
 
 .controller('PrController', ['$scope','$rootScope','$firebaseArray','$log', function($scope,$rootScope,$firebaseArray,$log) {
 
 	var myProjects = new Firebase('https://projectmanagementsystem-de50f.firebaseio.com/project');
-
 	$scope.projects = $firebaseArray(myProjects);
 
-
 	var myClients = new Firebase('https://projectmanagementsystem-de50f.firebaseio.com/clients');
-
 	$scope.getClients = $firebaseArray(myClients);
 
 	$scope.showForm = function() {
@@ -64,6 +67,7 @@ pmsApp
 		$scope.project_type = '';
 		$scope.project_details = '';
 		$scope.project_url = '';
+		$scope.project_source_url = '';
 		$scope.start_date = '';
 		$scope.completion_date = '';
 		$scope.budget = '';
@@ -77,17 +81,18 @@ pmsApp
 		//var record=$scope.projects.$getRecord($scope.client_name.$id);
 		$scope.projects.$add({
 			project_name:$scope.project_name,
-			client_name:$scope.client_name,
-			
+			client_name:$scope.client_name,			
 			project_type:$scope.project_type,
 			project_details:$scope.project_details,
 			project_url:$scope.project_url,
+			project_source_url:$scope.project_source_url,
 			start_date:$scope.start_date,
 			completion_date:$scope.completion_date,
 			budget:$scope.budget,
 			payment_mode:$scope.payment_mode
 			});
 		clearForm();
+		window.location.href = $rootScope.url+"#!/projects";	// redirects to list page when form is submitted
 	}
 
 	$scope.editData = function(project,id) {
@@ -99,6 +104,7 @@ pmsApp
 		$scope.project_type = project.project_type;
 		$scope.project_details = project.project_details;
 		$scope.project_url = project.project_url;
+		$scope.project_source_url = project.project_source_url;
 		$scope.start_date = project.start_date;
 		$scope.completion_date = project.completion_date;
 		$scope.budget = project.budget;
@@ -115,6 +121,7 @@ pmsApp
 		$scope.project_type = project.project_type;
 		$scope.project_details = project.project_details;
 		$scope.project_url = project.project_url;
+		$scope.project_source_url = project.project_source_url;
 		$scope.start_date = project.start_date;
 		$scope.completion_date = project.completion_date;
 		$scope.budget = project.budget;
@@ -130,6 +137,7 @@ pmsApp
 		record.project_type=$scope.project_type;
 		record.project_details=$scope.project_details;
 		record.project_url=$scope.project_url;
+		record.project_source_url=$scope.project_source_url;
 		record.start_date=$scope.start_date;
 		record.completion_date=$scope.completion_date;
 		record.budget=$scope.budget;
@@ -150,6 +158,13 @@ pmsApp
 .controller('ClController', ['$scope','$rootScope','$firebaseArray','$log', function($scope,$rootScope,$firebaseArray,$log) {
 
 	var myClients = new Firebase('https://projectmanagementsystem-de50f.firebaseio.com/clients');
+
+	// if($rootScope.openClientModal) {
+	// 	$scope.openClientModal = true;
+	// 	$('#addClientData').modal();
+	// 	$('#addClientData').removeClass('ng-hide');
+	// 	$('#addClientData').removeClass('fade');
+	// }
 
 	$scope.getClients = $firebaseArray(myClients);
 	$scope.getClientsTotal = $firebaseArray(myClients);
@@ -186,6 +201,7 @@ pmsApp
 			client_source_id:$scope.client_source_id,
 			});
 		clearForm();
+		window.location.href = $rootScope.url+"#!/clients";
 	}
 
 	$scope.editData = function(client,id) {
@@ -238,105 +254,5 @@ pmsApp
 			$scope.getClients.$remove(parent);
 		}
 	}
-
-
-	// search function(dynamic) veshraj -- not working
-	/*$scope.search = function(totalrows,searchStrig){
-	var tablerows=[];
-	if(searchStrig==undefined) return totalrows;
-	$tokens=searchStrig.split(" ");
-	$tokenlength=$tokens.length;
-	if(searchStrig=="")
-		{
-			alert("");
-		   $scope.getClients = $firebaseArray(myClients);
-		}
-		if(totalrows.length>0)
-		{
-			$keys=Object.keys(totalrows[0]);
-			$keylength=$keys.length;
-
-			$totalrecords=totalrows.length;
-			j=0;
-			for(j;j<$totalrecords;j++)
-			{
-				$found=true;
-				$rowstring="";
-				for(key=0;key<$keylength;key++)
-				{
-					$rowstring+=" "+totalrows[j][$keys[key]];
-				}
-				for(i=0;i<$tokenlength;i++)
-				{
-					$rowstring=$rowstring.toUpperCase();
-					if($rowstring.indexOf($tokens[i].toUpperCase())==-1)
-					{
-						$found=false;
-					}
-				}
-
-				if($found)
-				{
-					if(tablerows.indexOf(totalrows[j])==-1)
-					{
-						tablerows.push(totalrows[j]);   
-					}
-					
-				}
-			}
-		}  
-		$scope.getClients=tablerows;
-	}*/
-
-	
-
-
-	// search function by veshraj -- 'getClients' is the value in ng-repeat in html file
-	/*$scope.searchFunction=function(){
-		$string=$scope.search_string;
-		if($string==undefined) return false;
-		$tokens=$string.split(" ");
-		$scope.getClients=[];
-		$tokenlength=$tokens.length;
-		if($scope.search_string=="")
-		{
-			$scope.getClients=$scope.getClientsTotal;
-		}
-		   
-		if($scope.getClientsTotal.length>0)
-		{
-			$keys=Object.keys($scope.getClientsTotal[0]);
-			$keylength=$keys.length;
-
-			$totalrecords=$scope.getClientsTotal.length;
-			j=0;
-			for(j;j<$totalrecords;j++)
-			{
-				$found=true;
-				$rowstring="";
-				for(key=0;key<$keylength;key++)
-				{
-					$rowstring+=" "+$scope.getClientsTotal[j][$keys[key]];
-				}
-				for(i=0;i<$tokenlength;i++)
-				{
-					$rowstring=$rowstring.toUpperCase();
-					if($rowstring.indexOf($tokens[i].toUpperCase())==-1)
-					{
-						$found=false;
-					}
-				}
-
-				if($found)
-				{
-					if($scope.getClients.indexOf($scope.getClientsTotal[j])==-1)
-					{
-						$scope.getClients.push($scope.getClientsTotal[j]);   
-					}
-					
-				}
-			}
-		}
-	}*/
 
 }]);
