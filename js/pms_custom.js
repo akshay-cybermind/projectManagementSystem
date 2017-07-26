@@ -1,6 +1,6 @@
 //var pmsApp = angular.module('pmsApp', ['firebase']);
 
-var pmsApp = angular.module("pmsApp", ['firebase',"ngRoute"]);
+var pmsApp = angular.module("pmsApp", ['firebase','countrySelect',"ngRoute"]);
 
 /* ngRoute - to make ng-view work */
 pmsApp.config(['$routeProvider',function($routeProvider) {
